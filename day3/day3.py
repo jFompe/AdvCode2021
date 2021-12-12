@@ -56,12 +56,12 @@ def main():
   input = read_input("input.txt")
 
   s = Submarine()
-  day2_1 = s.power_consumption(input)
-  print(day2_1)
+  day3_1 = s.power_consumption(input)
+  print(day3_1)
 
   s = AdvancedSubmarine()
-  day2_2 = s.life_support_rating(input)
-  print(day2_2)
+  day3_2 = s.life_support_rating(input)
+  print(day3_2)
 
 
 if __name__ == "__main__":
