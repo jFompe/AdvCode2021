@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List
 import numpy as np
 from pydash import map_
 
@@ -19,9 +19,6 @@ class Bingo:
     return False
 
   def _calculate_result(self, number: int):
-    print('--------------')
-    print(np.sum(self.table) + self.marked)
-    print(number)
     return (np.sum(self.table) + self.marked) * number
 
 
@@ -40,14 +37,15 @@ class BingoManager:
 class AdvancedBingoManager(BingoManager):
 
     def play_to_lose(self):
+      keep_checking = [True] * len(self.tables)
       for d in self.draws:
         for i,b in enumerate(self.tables):
+          if not keep_checking[i]:
+            continue
           if result := b.draw_number(d):
-            if len(self.tables) == 1:
-              print(b.table)
-              print('--------------')
+            if np.sum(keep_checking)  == 1:
               return result
-            self.tables.remove(b)
+            keep_checking[i] = False
 
 
 
@@ -61,7 +59,7 @@ def read_input(file_name: str) -> List[str]:
 
 
 def main():
-  INPUT = "test.txt"
+  INPUT = "input.txt"
   draws, tables = read_input(INPUT)
   
   bm = BingoManager(draws, tables)
